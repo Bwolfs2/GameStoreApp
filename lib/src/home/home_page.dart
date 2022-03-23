@@ -16,110 +16,108 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: Expanded(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color(0xff120B4C),
-            Color(0xff3B0A58),
-          ])),
-          child: Column(
-            children: [
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Color(0xff120B4C),
+          Color(0xff3B0A58),
+        ])),
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  const Center(
+                    child: CircleAvatar(
+                      radius: 24,
+                      backgroundImage: NetworkImage("https://cdn.pixabay.com/photo/2012/11/21/17/02/lion-66898_960_720.jpg"),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Vladmir Kucher',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      Text(
+                        'UX/UI Designer',
+                        style: TextStyle(color: Colors.white.withOpacity(.5), fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.fullscreen_exit,
+                      color: Colors.white,
+                      size: 36,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
                   children: [
-                    const Center(
-                      child: CircleAvatar(
-                        radius: 24,
-                        backgroundImage: NetworkImage("https://cdn.pixabay.com/photo/2012/11/21/17/02/lion-66898_960_720.jpg"),
+                    const SizedBox(height: 40),
+                    Container(
+                      margin: const EdgeInsets.all(16),
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.white.withOpacity(.8),
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            8,
+                          ),
+                          color: Colors.black.withOpacity(.3)),
+                      height: 60,
+                      child: Text(
+                        "Enter your code",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white.withOpacity(.5),
+                        ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 24,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Vladmir Kucher',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                        Text(
-                          'UX/UI Designer',
-                          style: TextStyle(color: Colors.white.withOpacity(.5), fontSize: 16),
+                    const SizedBox(height: 50),
+                    const RankCard(),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            "Recommended",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.fullscreen_exit,
-                        color: Colors.white,
-                        size: 36,
-                      ),
-                    )
+                    const CardList(),
+                    const CardList(),
+                    const SizedBox(height: 100),
                   ],
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 40),
-                      Container(
-                        margin: const EdgeInsets.all(16),
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.white.withOpacity(.8),
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              8,
-                            ),
-                            color: Colors.black.withOpacity(.3)),
-                        height: 60,
-                        child: Text(
-                          "Enter your code",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white.withOpacity(.5),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 50),
-                      const RankCard(),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              "Recommended",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const CardList(),
-                      const CardList(),
-                      const SizedBox(height: 100),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
