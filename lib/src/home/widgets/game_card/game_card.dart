@@ -92,8 +92,16 @@ class GameCard extends StatelessWidget {
                       )
                     ],
                   ),
-                )
+                ),
               ],
+            ),
+          ),
+          Material(
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(16),
+              onTap: () {},
             ),
           ),
         ],
