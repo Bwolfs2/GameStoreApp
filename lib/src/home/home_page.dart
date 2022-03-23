@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:glass_app_bar/src/home/widgets/card_list/card_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,54 +11,64 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var pageController = PageController(initialPage: 0, viewportFraction: .7);
-  ValueNotifier<double> offsetPage = ValueNotifier(0.0);
-
-  @override
-  void initState() {
-    super.initState();
-    pageController.addListener(() {
-      offsetPage.value = pageController.page ?? 0;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: Column(
-        children: [
-          Container(
-            height: 300,
-            alignment: Alignment.center,
-            child: SizedBox(
-              height: 150,
-              child: PageView.builder(
-                controller: pageController,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return ValueListenableBuilder<double>(
-                    valueListenable: offsetPage,
-                    builder: (context, value, child) {
-                      double align = (value - index).abs();
-
-                      return Container(
-                        color: Colors.red,
-                        margin: EdgeInsets.only(left: 16, right: 16, bottom: align * 20, top: 40 - (20 * align)),
-                        height: 150,
-                      );
-                    },
-                  );
-                },
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Color(0xff120B4C),
+          Color(0xff3B0A58),
+        ])),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              const SizedBox(height: 300),
+              Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      "Recommended",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          )
-        ],
+              const CardList(),
+              const CardList(),
+              const SizedBox(height: 100),
+            ],
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
+      floatingActionButton: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Material(
+              elevation: 4,
+              color: const Color(0xff3b3e9a).withOpacity(.2),
+              child: InkWell(
+                //backgroundColor: Colors.transparent,
+                onTap: () {},
+                child: const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.transparent,
@@ -74,16 +85,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-class BottomBarClipper extends CustomClipper<Path> {
-  @override
-  getClip(Size size) {
-    Path path = Path();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper oldClipper) => false;
 }
